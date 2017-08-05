@@ -11,7 +11,13 @@
 
 APK_SOURCE=$1;
 # PACKAGE_NAME=$1;
-ADB_SOURCE="/Users/hartviq/Library/Android/sdk/platform-tools/adb";
+
+if [ $ANDROID_HOME = "" ]; then
+    echo "Please set ANDROID_HOME first."
+    exit 0
+fi
+
+ADB_SOURCE="$ANDROID_HOME/platform-tools/adb";
 ADBDEVICES=$($ADB_SOURCE devices| grep -E -i -w 'device' | awk '{print $1}' FS=" ");
 
 while read -r device
